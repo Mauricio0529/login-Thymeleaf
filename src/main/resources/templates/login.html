@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Login  de usuarios</title>
+
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed"
+              data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+              aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#" th:href="@{/}"><b>Monastery</b></a>
+
+    </div>
+  </div>
+</nav>
+
+<br>
+<br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h1>Iniciar Sesión</h1>
+      <form th:action="@{/login}" method="POST">
+        <!-- el param.exito se retorna en el controller, si se registro correctamente el usuario-->
+        <div th:if=${param.error}>
+          <div class="alerta alert-danger">
+            <label class="control-label"> Usuario o contraseña invalidos </label>
+          </div>
+        </div>
+
+        <!-- el param.logout se la estamos pasando en la configuracion de securityJWT donde le dimos el permiso -->
+        <div th:if=${param.logout}>
+          <div class="alerta alert-info">
+            <label class="control-label"> Ha cerrado sesión exitosamente </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="username">Email: </label>
+          <!-- se escribe este nombre name="username" para que funcione el logeo, NO SE PORQUE SE COLOCA ESE NOMBRE -->
+          <input type="email" id="username" name="username" class="form-control" required autofocus="autofocus" placeholder="Correo Electronico">
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="password">Contraseña: </label>
+          <!-- se escribe este nombre name="password" para que funcione el logeo, NO SE PORQUE SE COLOCA ESE NOMBRE -->
+          <input type="password" id="password" name="password" class="form-control" required autofocus="autofocus" placeholder="Ingresa tu contraseña">
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+              <input type="submit" class="form-control btn btn-primary"
+                     name="login-submit" id="login-submit" value="Iniciar Sesión"/>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="form-group">
+        <span>Si eres nuevo usuario <a th:href="@{/registro}">regístrate aqui </a> </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>
